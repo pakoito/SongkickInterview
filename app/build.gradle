@@ -1,0 +1,146 @@
+/*
+ * Copyright (c) pakoito 2015
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+apply plugin: 'com.android.application'
+apply plugin: 'com.zeroturnaround.jrebel.android'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'com.getkeepsafe.dexcount'
+
+android {
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'LICENSE.txt'
+    }
+
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "com.pacoworks.dereference"
+        minSdkVersion 16
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "ECOSYSTEM", "PROVIDER"
+
+    productFlavors {
+        google {
+            dimension "ECOSYSTEM"
+        }
+
+        whatever {
+            dimension "PROVIDER"
+            applicationId "com.pacoworks.dereference.songkick"
+            buildConfigField "String", "ENDPOINT", "\"http://api.songkick.com/api/3.0/\""
+            buildConfigField "String", "API_KEY", "\"HUEHUEHUEHUE\""
+        }
+
+        another {
+            dimension "PROVIDER"
+            applicationId "com.pacoworks.dereference.another"
+            buildConfigField "String", "ENDPOINT", "\"http://different.fake.endpoint.com\""
+        }
+    }
+}
+
+dependencies {
+    // Android stuff
+    compile 'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.android.support:support-v4:22.2.1'
+    compile 'com.android.support:support-v13:22.2.1'
+    compile 'com.android.support:support-annotations:22.2.1'
+    compile 'com.android.support:recyclerview-v7:22.2.1'
+
+    // RX
+    compile 'io.reactivex:rxjava:1.0.14'
+    compile 'io.reactivex:rxandroid:1.0.1'
+    compile 'com.jakewharton.rxbinding:rxbinding:0.2.0'
+
+    // CODEGEN
+    apt 'org.projectlombok:lombok:1.16.6'
+    provided "org.projectlombok:lombok:1.16.6"
+
+    // DEPENDENCY INJECTION
+    compile 'com.jakewharton:butterknife:7.0.1'
+    apt 'com.google.dagger:dagger-compiler:2.0.1'
+    compile 'com.google.dagger:dagger:2.0.1'
+    provided 'javax.annotation:jsr250-api:1.0'
+
+    // NETWORK
+    compile 'com.squareup.retrofit:retrofit:2.0.0-beta1'
+    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta1'
+    compile 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta1'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'com.squareup.okio:okio:1.6.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.pwittchen:reactivenetwork:0.0.2'
+    // FIXME promote when needed
+    // compile 'com.neovisionaries:nv-websocket-client:1.5'
+
+    // SERIALIZATION
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.f2prateek.dart:dart:2.0.0-RC1'
+    apt 'com.f2prateek.dart:dart-processor:2.0.0-RC1'
+    compile 'com.f2prateek.dart:henson:2.0.0-RC1'
+    apt 'com.f2prateek.dart:henson-processor:2.0.0-RC1'
+
+    // DEBUG
+    compile 'com.jakewharton.timber:timber:3.1.0'
+    compile 'com.facebook.stetho:stetho:1.1.1'
+    compile 'com.facebook.stetho:stetho-okhttp:1.1.1'
+    compile 'com.jakewharton.scalpel:scalpel:1.1.2'
+    compile 'io.palaima.debugdrawer:debugdrawer:0.4.0'
+    compile 'io.palaima.debugdrawer:debugdrawer-okhttp:0.4.0'
+    compile 'io.palaima.debugdrawer:debugdrawer-picasso:0.4.0'
+    compile 'io.palaima.debugdrawer:debugdrawer-scalpel:0.4.0'
+    compile 'io.palaima.debugdrawer:debugdrawer-log:0.4.0'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3.1'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3.1'
+
+    // UI WIDGETS
+    compile 'com.thomsonreuters:rippledecoratorview:1.0.2'
+    compile 'com.hannesdorfmann:adapterdelegates:1.0.2'
+    compile 'com.viewpagerindicator:library:2.4.1@aar'
+
+    // DB
+    compile 'com.couchbase.lite:couchbase-lite-android:1.1.0'
+
+    // TESTING
+    testCompile 'junit:junit:4.12'
+    testCompile 'uk.co.ribot.assertj-rx:assertj-rx:0.1.0'
+    androidTestCompile('com.novoda:rxpresso:0.2.0') {
+        // Requires 23.0.0, we're in 22.2.1
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+}

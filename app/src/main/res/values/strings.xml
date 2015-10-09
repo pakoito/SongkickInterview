@@ -1,0 +1,28 @@
+<!--
+  ~ Copyright (c) pakoito 2015
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <string name="app_name">Dereference</string>
+    <string name="activity_title_start">Songkick Interview</string>
+    <string name="activity_title_details">Artist Details</string>
+    <string name="offline_text">Offline</string>
+    <string name="loading_overlay">Loading</string>
+    <string name="empty_element">Information loading or not available.\nPlease wait or type a new value.</string>
+    <string name="empty_element_details">Information loading or not available.</string>
+    <string name="start_artist_hint">Type your artist here</string>
+    <string name="artist_header_url">URL:</string>
+</resources>
