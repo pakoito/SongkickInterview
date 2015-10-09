@@ -44,6 +44,7 @@ See screenshot.png
 
 ## Known Issues
 
+API token is not provided, it has to be given in app/build.gradle for buildConfigField API_KEY
 Network operations persist on rotation only if they hit the network cache. 
 While it's intentional to not hinder readability, it can be easily solved by subscribing network calls until destruction instead of until pause.
 
