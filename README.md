@@ -64,4 +64,8 @@ License
 
 Copyright (c) pakoito 2015
 
+GNU GENERAL PUBLIC LICENSE
+
+Version 3, 29 June 2007
+
 See LICENSE.md
