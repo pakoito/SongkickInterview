@@ -48,6 +48,8 @@ public class SongkickDetailsPresenter extends
     public static final int CONNECTIVITY_DEBOUNCE_POLICY = 1;
 
     private static final int TIMEOUT_POLICY = 60;
+    
+    private final Action1<List<Artist>> logAndShowError = RxActions.doMultiple(RxLog.logError(), toastForErrorType());
 
     @Inject
     Observable<ConnectivityStatus> connectivity;
@@ -100,9 +102,7 @@ public class SongkickDetailsPresenter extends
                         else
                             return requestArtists(songkickApi, timeoutPolicy, status.second, apiKey)
                                     .observeOn(AndroidSchedulers.mainThread())
-                                    .doOnError(
-                                            RxActions.doMultiple(RxLog.logError(),
-                                                    toastForErrorType()))
+                                    .doOnError(logAndShowError)
                                     .onErrorReturn(giveJustArtist())
                                     .doOnNext(getUi().hideLoading());
                     }
