@@ -49,7 +49,7 @@ public class SongkickDetailsPresenter extends
 
     private static final int TIMEOUT_POLICY = 60;
     
-    private final Action1<List<Artist>> logAndShowError = RxActions.doMultiple(RxLog.logError(), toastForErrorType());
+    private final Action1<List<Artist>> logAndShowError = RxActions.<List<Artist>>doMultiple(RxLog.logError(), toastForErrorType());
 
     @Inject
     Observable<ConnectivityStatus> connectivity;
